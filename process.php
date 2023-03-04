@@ -7,24 +7,30 @@ require_once 'traingle.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $shape = $_POST['shape'];
+
     $mesurment1 = $_POST['mesurment1'];
     $mesurment2 = $_POST['mesurment2'];
 
-    if ($shape == 'circle') {
-
-        $circle = new Circle($shape, $mesurment1);
-        $area = $circle->getArea();
-    } elseif ($shape == 'rectangle') {
-
-        $rectangle = new Rectangle($shape, $mesurment1, $mesurment2);
-        $area = $rectangle->getArea();
-    } elseif ($shape == 'tringle') {
-
-        $tringle = new Traingle($shape, $mesurment1, $mesurment2);
-        $area = $tringle->getArea();
-    } else {
-        $area = 0;
+    if ((!is_numeric($mesurment1)) && (!is_numeric($mesurment2))){
+        echo "Invallid Input";
+        exit();
     }
+
+        if ($shape == 'circle') {
+
+            $circle = new Circle($shape, $mesurment1);
+            $area = $circle->getArea();
+        } elseif ($shape == 'rectangle') {
+
+            $rectangle = new Rectangle($shape, $mesurment1, $mesurment2);
+            $area = $rectangle->getArea();
+        } elseif ($shape == 'tringle') {
+
+            $tringle = new Traingle($shape, $mesurment1, $mesurment2);
+            $area = $tringle->getArea();
+        } else {
+            $area = 0;
+        }
 } else {
     echo "Not Found";
     echo ' go <a href="index.php">back</a>';
@@ -51,25 +57,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Shape Result
             </h2>
             <div class="m-5 fs-5">
-            <label for="">
-                Shape: <span class="text-capitalize" style="font-weight: 600;">
-                <?php
+                <label for="">
+                    Shape: <span class="text-capitalize" style="font-weight: 600;">
+                        <?php
 
-                echo $area > 0 ? $shape : '';
+                        echo $area > 0 ? $shape : '';
 
-                ?>
-                </span>
-            </label>
-            <br>
-            <label for="">
-                Area: <span style="font-weight: 600;">
-                <?php
+                        ?>
+                    </span>
+                </label>
+                <br>
+                <label for="">
+                    Area: <span style="font-weight: 600;">
+                        <?php
 
-                echo $area > 0 ? $area : '';
+                        echo $area > 0 ? $area : '';
 
-                ?>
-                </span>
-            </label>
+                        ?>
+                    </span>
+                </label>
             </div>
 
         </div>
